@@ -6,9 +6,9 @@ from fastapi.security import OAuth2PasswordRequestForm
 from sqlmodel import select
 from sqlmodel.ext.asyncio.session import AsyncSession
 
-from src import settings
 from src.db import get_async_session
 from src.services import user_ser, user_signal_ser
+from src.settings import settings
 
 from .models import User, UserInDb
 from .schemas import RefreshTokenReq, Token, TokenRenew, UserCreateReq

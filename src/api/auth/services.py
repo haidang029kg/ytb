@@ -8,8 +8,8 @@ from passlib.context import CryptContext
 from sqlmodel import select
 from sqlmodel.ext.asyncio.session import AsyncSession
 
-from src import settings
 from src.db import get_async_session
+from src.settings import settings
 
 from .models import User, UserInDb
 
