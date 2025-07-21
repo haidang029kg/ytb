@@ -33,7 +33,7 @@ async def get_authenticated_user(
 	except jwt.InvalidTokenError:
 		raise credentials_exception
 
-	username: str = payload.get("sub")
+	username: str | None = payload.get("sub")
 	if username is None:
 		raise credentials_exception
 
@@ -63,7 +63,7 @@ def validate_refresh_token(user: User, refresh_token: str):
 		raise HTTPException(
 			status_code=status.HTTP_400_BAD_REQUEST, detail="Invalid refresh token!"
 		)
-	username: str = data.get("sub")
+	username: str | None = data.get("sub")
 	if username is None or username != user.username:
 		raise HTTPException(
 			status_code=status.HTTP_400_BAD_REQUEST, detail="Invalid refresh token!"

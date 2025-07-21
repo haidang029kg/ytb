@@ -20,6 +20,7 @@ class Settings(BaseSettings):
 	ACCESS_TOKEN_EXPIRE_MINUTES: int = Field(default=30)
 	ACCESS_TOKEN_MAX_LIFETIME_DAYS: int = Field(default=45)
 	REFRESH_TOKEN_EXPIRE_DAYS: int = Field(default=7)
+	ACCESS_TOKEN_MAX_LIFE_TIME_DAYS: int = Field(default=7)
 
 	# database
 	DB_URL: str = Field(default="sqlite:///db.sqlite")

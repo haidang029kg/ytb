@@ -15,8 +15,14 @@ async def init_db():
 		await conn.run_sync(SQLModel.metadata.create_all)
 
 
-# Dependency to provide an async session
+# get the session manually
 @contextlib.asynccontextmanager
+async def get_async_session_ctx() -> AsyncGenerator[AsyncSession, Any]:
+	async with AsyncSession(async_engine) as session:
+		yield session
+
+
+# Dependency to provide an async session
 async def get_async_session() -> AsyncGenerator[AsyncSession, Any]:
 	async with AsyncSession(async_engine) as session:
 		yield session
