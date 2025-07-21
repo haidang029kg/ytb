@@ -1,0 +1,19 @@
+AWSTemplateFormatVersion: "2010-09-09"
+Transform: AWS::Serverless-2016-10-31
+Description: FastAPI Lambda ZIP deployment
+
+Resources:
+  FastApiFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      PackageType: Image
+      ImageUri: test-uv-lambda:latest
+      Events:
+        Api:
+          Type: Api
+          Properties:
+            Path: /{proxy+}
+            Method: ANY
+  FastApiFunctionArn:
+    Description: "ARN of the FastAPI Lambda function"
+    Value: !GetAtt FastApiFunction.Arn
