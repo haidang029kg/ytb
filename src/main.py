@@ -4,8 +4,8 @@ from fastapi import FastAPI
 from starlette.middleware.cors import CORSMiddleware
 
 from src.api import auth_routes, studio_routes
+from src.core.logger import logger
 from src.db import async_engine, init_db
-from src.logger import logger
 
 
 @asynccontextmanager

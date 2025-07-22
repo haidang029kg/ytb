@@ -3,7 +3,7 @@ import os
 import sys
 from logging.handlers import TimedRotatingFileHandler
 
-from src.settings import settings
+from src.core.settings import settings
 
 logger = logging.getLogger()
 payment_logger = logging.getLogger("payment")

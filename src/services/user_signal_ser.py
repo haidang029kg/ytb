@@ -2,7 +2,7 @@ from abc import ABC, abstractmethod
 from enum import Enum
 
 from src.api.auth import services as auth_ser
-from src.logger import logger
+from src.core.logger import logger
 from src.services import utils
 
 
