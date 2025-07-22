@@ -1,0 +1,10 @@
+# Ignore AWS SAM build artifacts
+.aws-sam
+
+# Ignore local Python virtual environments
+.venv
+
+# Common Python cache files
+__pycache__/
+*.pyc
+*.pyo
