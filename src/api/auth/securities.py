@@ -6,8 +6,7 @@ from fastapi.security import HTTPAuthorizationCredentials, HTTPBearer
 from sqlmodel.ext.asyncio.session import AsyncSession
 
 from src.db import get_async_session
-
-from .services import decode_token
+from src.services.authentication import decode_token
 
 
 class CustomHTTPBearer(HTTPBearer):

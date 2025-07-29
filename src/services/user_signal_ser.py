@@ -1,9 +1,8 @@
 from abc import ABC, abstractmethod
 from enum import Enum
 
-from src.api.auth import services as auth_ser
 from src.core.logger import logger
-from src.services import utils
+from src.services import authentication, utils
 
 
 class UserSignalEventType(Enum):
@@ -40,7 +39,7 @@ class OnRegisterConfirmEvent(BaseUserSignal):
 
 		assert user_id, "requires user_id"
 
-		token = await auth_ser.create_confirm_token(user_id)
+		token = await authentication.create_confirm_token(user_id)
 		url = utils.build_url(
 			query_params=dict(token=token),
 			url="auth/registration/confirmation",

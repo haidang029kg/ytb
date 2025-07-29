@@ -8,11 +8,10 @@ from sqlmodel.ext.asyncio.session import AsyncSession
 
 from src.core.settings import settings
 from src.db import get_async_session
+from src.models.users import User, UserInDb
+from src.schemas.users import RefreshTokenReq, Token, TokenRenew, UserCreateReq
 from src.services import user_ser, user_signal_ser
-
-from .models import User, UserInDb
-from .schemas import RefreshTokenReq, Token, TokenRenew, UserCreateReq
-from .services import (
+from src.services.authentication import (
 	create_access_token,
 	create_refresh_token,
 	decode_token,

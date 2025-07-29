@@ -10,8 +10,7 @@ from sqlmodel.ext.asyncio.session import AsyncSession
 
 from src.core.settings import settings
 from src.db import get_async_session
-
-from .models import User, UserInDb
+from src.models.users import User, UserInDb
 
 pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
 
