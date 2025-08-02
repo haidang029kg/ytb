@@ -1,10 +1,10 @@
 from typing import Annotated
 
+from src.db import get_async_session
 from fastapi import Depends
 from sqlmodel import select
 from sqlmodel.ext.asyncio.session import AsyncSession
 
-from src.db import get_async_session
 from src.models import users as user_model
 
 

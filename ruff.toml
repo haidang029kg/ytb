@@ -1,9 +1,0 @@
-line-length = 100
-
-[lint]
-select = ["SIM", "FAST", "ASYNC", "I"]
-
-[format]
-quote-style = "double"
-indent-style = "tab"
-docstring-code-format = true

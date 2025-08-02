@@ -3,13 +3,24 @@ import os
 import sys
 from logging.handlers import TimedRotatingFileHandler
 
+from src.core.ctx_vars import request_id_ctx_var
 from src.core.settings import settings
+
+# log formatter
+formatter = logging.Formatter(
+	fmt="%(asctime)s - %(levelname)s - %(request_id)s - logger=%(name)s - %(module)s:%(lineno)d - %(message)s"
+)
+
+
+# Custom logging filter to add UUID from context
+class RequestIdFilter(logging.Filter):
+	def filter(self, record):
+		record.request_id = request_id_ctx_var.get()
+		return True
+
 
 logger = logging.getLogger()
 payment_logger = logging.getLogger("payment")
-
-# log formatter
-formatter = logging.Formatter(fmt="%(asctime)s - %(levelname)s - %(message)s")
 
 os.makedirs(os.path.join(settings.LOG_DIR), exist_ok=True)
 os.makedirs(os.path.join(settings.LOG_DIR, "payment"), exist_ok=True)
@@ -34,16 +45,20 @@ stream_handler.setFormatter(formatter)
 file_rotate_handler.setFormatter(formatter)
 payment_file_rotate_handler.setFormatter(formatter)
 
+# add filter
+request_id_filter = RequestIdFilter()
+
+stream_handler.addFilter(request_id_filter)
+file_rotate_handler.addFilter(request_id_filter)
+payment_file_rotate_handler.addFilter(request_id_filter)
 
 # add handler to the log
-logger.handlers = [
-	stream_handler,
-	file_rotate_handler,
-]
+if not logger.handlers:
+	logger.addHandler(stream_handler)
+	logger.addHandler(file_rotate_handler)
 
-payment_logger.handlers = [
-	payment_file_rotate_handler,
-]
+if not payment_logger.handlers:
+	payment_logger.addHandler(payment_file_rotate_handler)
 
 # set log level
 logger.setLevel(logging.INFO)

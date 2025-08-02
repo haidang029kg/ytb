@@ -6,6 +6,7 @@ from starlette.middleware.cors import CORSMiddleware
 from src.api import auth_routes, studio_routes
 from src.core.logger import logger
 from src.db import async_engine, init_db
+from src.middlewares import InfoRequestMiddleWare
 
 
 @asynccontextmanager
@@ -29,6 +30,7 @@ app.add_middleware(
 	allow_methods=["*"],
 	allow_headers=["*"],
 )
+app.add_middleware(InfoRequestMiddleWare)
 
 
 @app.get("/health")
